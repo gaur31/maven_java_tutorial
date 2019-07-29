@@ -14,11 +14,14 @@ pipeline {
 
         stage ('Build') {
             steps {
-                    sh  'cd NumberGenerator & mvn install'
+                dir("/home/durgeshgaur/maven_java_tutorial/NumberGenerator"){
+                    
+                    sh 'mvn -Dmaven.test.failure.ignore=true -U clean install'
+                }
             }
              post {
                 success {
-                    junit 'NumberGenerator/target/surefire-reports/*.xml'
+                    junit '/home/durgeshgaur/maven_java_tutorial/NumberGenerator/target/surefire-reports/*.xml'
                         }
                  }
                
